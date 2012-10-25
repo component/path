@@ -1,4 +1,3 @@
-
 # path
 
   Path utilities.
@@ -8,9 +7,9 @@
    - [.extname(path)](#extnamepath)
    - [.basename(path)](#basenamepath)
    - [.dirname(path)](#dirnamepath)
-<a name="" />
+<a name=""></a>
  
-<a name="extnamepath" />
+<a name="extnamepath"></a>
 ### .extname(path)
 should return the extension.
 
@@ -22,7 +21,7 @@ p.extname('foo/bar/baz.png').should.equal('.png');
 p.extname('foo/bar.bar.baz/raz.png').should.equal('.png');
 ```
 
-<a name="basenamepath" />
+<a name="basenamepath"></a>
 ### .basename(path)
 should return the last path segment.
 
@@ -33,7 +32,7 @@ p.basename('foo/bar/baz').should.equal('baz');
 p.basename('foo/bar/baz.png').should.equal('baz.png');
 ```
 
-<a name="dirnamepath" />
+<a name="dirnamepath"></a>
 ### .dirname(path)
 should return the leading segments.
 
