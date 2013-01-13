@@ -42,7 +42,11 @@ p.dirname('foo').should.equal('.');
 p.dirname('foo/bar/baz').should.equal('foo/bar');
 p.dirname('foo/bar/baz.png').should.equal('foo/bar');
 ```
+## Running the tests
 
+To run in node just run `$ make test`
+
+To run in a browser you first need to build by running `$ make test/built.js`. Then navigate your browser to the test directory of the repo.
 
 ## License 
 
