@@ -47,3 +47,11 @@ describe('normalize(path)', function () {
     p.normalize('foo/bar').should.equal('foo/bar')
   })
 })
+
+describe('split(path)', function () {
+  it('return an ordered array of segments', function () {
+    p.split('/a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
+    p.split('a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
+    p.split('a/b/c/d/').should.deep.equal(['a', 'b', 'c', 'd'])
+  })
+})

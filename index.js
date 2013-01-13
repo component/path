@@ -53,3 +53,17 @@ function normalize (path) {
 
   return (isAbsolute ? '/' : '') + res.join('/')
 }
+
+/**
+ * Split a path into its components
+ *
+ * @param {String} path 
+ * @return {Array}
+ */
+
+exports.split = split
+function split (path) {
+  if (path[0] === '/') path = path.slice(1)
+  if (path[path.length - 1] === '/') path = path.slice(0, -1)
+  return path.split('/')
+}
