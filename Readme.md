@@ -2,15 +2,17 @@
 
   Path utilities.
 
-## API
-
+# API
    - [.extname(path)](#extnamepath)
    - [.basename(path)](#basenamepath)
    - [.dirname(path)](#dirnamepath)
+   - [.join(path)](#joinpath)
+   - [.normalize(path)](#normalizepath)
+   - [.split(path)](#splitpath)
 <a name=""></a>
  
 <a name="extnamepath"></a>
-### .extname(path)
+# .extname(path)
 should return the extension.
 
 ```js
@@ -22,10 +24,11 @@ p.extname('foo/bar.bar.baz/raz.png').should.equal('.png');
 ```
 
 <a name="basenamepath"></a>
-### .basename(path)
+# .basename(path)
 should return the last path segment.
 
 ```js
+p.basename('foo/').should.equal('');
 p.basename('foo').should.equal('foo');
 p.basename('foo/bar/baz').should.equal('baz');
 p.basename('foo/bar/baz').should.equal('baz');
@@ -33,14 +36,54 @@ p.basename('foo/bar/baz.png').should.equal('baz.png');
 ```
 
 <a name="dirnamepath"></a>
-### .dirname(path)
+# .dirname(path)
 should return the leading segments.
 
 ```js
 p.dirname('').should.equal('.');
 p.dirname('foo').should.equal('.');
 p.dirname('foo/bar/baz').should.equal('foo/bar');
+p.dirname('foo/bar/baz/').should.equal('foo/bar/baz');
 p.dirname('foo/bar/baz.png').should.equal('foo/bar');
+```
+
+<a name="joinpath"></a>
+# .join(path)
+should join segements sequencially.
+
+```js
+p.join('foo').should.equal('foo')
+p.join('foo', 'bar').should.equal('foo/bar')
+```
+
+should normalize the result.
+
+```js
+p.join('/foo', 'bar', '/baz/asdf', 'quux', '..').should.equal('/foo/bar/baz/asdf')
+```
+
+<a name="normalizepath"></a>
+# normalize(path)
+should iron out the path.
+
+```js
+p.normalize('/foo/bar//baz/asdf/quux/..').should.equal('/foo/bar/baz/asdf')
+```
+
+should only return an absolute path if its given one.
+
+```js
+p.normalize('foo/bar').should.equal('foo/bar')
+```
+
+<a name="splitpath"></a>
+# split(path)
+return an ordered array of segments.
+
+```js
+p.split('/a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
+p.split('a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
+p.split('a/b/c/d/').should.deep.equal(['a', 'b', 'c', 'd'])
 ```
 ## Running the tests
 
