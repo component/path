@@ -13,6 +13,7 @@ describe('.extname(path)', function(){
 
 describe('.basename(path)', function(){
   it('should return the last path segment', function(){
+    p.basename('foo/').should.equal('');
     p.basename('foo').should.equal('foo');
     p.basename('foo/bar/baz').should.equal('baz');
     p.basename('foo/bar/baz').should.equal('baz');
@@ -25,6 +26,7 @@ describe('.dirname(path)', function(){
     p.dirname('').should.equal('.');
     p.dirname('foo').should.equal('.');
     p.dirname('foo/bar/baz').should.equal('foo/bar');
+    p.dirname('foo/bar/baz/').should.equal('foo/bar/baz');
     p.dirname('foo/bar/baz.png').should.equal('foo/bar');
   })
 })
