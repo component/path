@@ -57,3 +57,22 @@ describe('split(path)', function () {
     p.split('a/b/c/d/').should.deep.equal(['a', 'b', 'c', 'd'])
   })
 })
+
+describe('commonDir(...)', function () {
+  it('should return "/" if there isn\'t a common directory', function () {
+    p.commonDir().should.equal('/')
+    p.commonDir('/').should.equal('/')
+    p.commonDir('').should.equal('/')
+    p.commonDir('/a/b', '/c/d').should.equal('/')
+  })
+  it('should return the first common directory', function () {
+    p.commonDir('/a/b/c').should.equal('/a/b')
+    p.commonDir('/a/b/c', '/a/b/d').should.equal('/a/b')
+    p.commonDir('/a/b/c', '/a/b/d', '/a/b/e/r').should.equal('/a/b')
+  })
+  it('should treat paths starting without a slash as absolute', function () {
+    p.commonDir('a').should.equal('/')
+    p.commonDir('a/b', 'c/d').should.equal('/')
+    p.commonDir('a/b/c', 'a/b/d', 'a/b/e/r').should.equal('/a/b')
+  })
+})
