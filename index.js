@@ -73,6 +73,7 @@ function split (path) {
  */
 
 function commonDir (first) {
+  if (first instanceof Array) return commonDir.apply(null, first)
   if (!first) return '/'
   first = dirname(first)
   if (first === '.') return '/'

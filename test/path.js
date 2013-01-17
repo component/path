@@ -75,4 +75,7 @@ describe('commonDir(...)', function () {
     p.commonDir('a/b', 'c/d').should.equal('/')
     p.commonDir('a/b/c', 'a/b/d', 'a/b/e/r').should.equal('/a/b')
   })
+  it('should optionally take an array as the first argument', function () {
+    p.commonDir(['/a/b/c', '/a/b/d']).should.equal('/a/b')
+  })
 })
