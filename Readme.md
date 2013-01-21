@@ -7,8 +7,9 @@
    - [.basename(path)](#basenamepath)
    - [.dirname(path)](#dirnamepath)
    - [.join(path)](#joinpath)
-   - [.normalize(path)](#normalizepath)
-   - [.split(path)](#splitpath)
+   - [normalize(path)](#normalizepath)
+   - [split(path)](#splitpath)
+   - [commonDir(...)](#commondir)
 <a name=""></a>
  
 <a name="extnamepath"></a>
@@ -37,16 +38,6 @@ p.basename('foo/bar/baz.png').should.equal('baz.png');
 
 <a name="dirnamepath"></a>
 # .dirname(path)
-should return the leading segments.
-
-```js
-p.dirname('').should.equal('.');
-p.dirname('foo').should.equal('.');
-p.dirname('foo/bar/baz').should.equal('foo/bar');
-p.dirname('foo/bar/baz/').should.equal('foo/bar/baz');
-p.dirname('foo/bar/baz.png').should.equal('foo/bar');
-```
-
 <a name="joinpath"></a>
 # .join(path)
 should join segements sequencially.
@@ -85,6 +76,34 @@ p.split('/a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
 p.split('a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
 p.split('a/b/c/d/').should.deep.equal(['a', 'b', 'c', 'd'])
 ```
+
+<a name="commondir"></a>
+# commonDir(...)
+should return "/" if there isn't a common directory.
+
+```js
+p.commonDir().should.equal('/')
+p.commonDir('/').should.equal('/')
+p.commonDir('').should.equal('/')
+p.commonDir('/a/b', '/c/d').should.equal('/')
+```
+
+should return the first common directory.
+
+```js
+p.commonDir('/a/b/c').should.equal('/a/b')
+p.commonDir('/a/b/c', '/a/b/d').should.equal('/a/b')
+p.commonDir('/a/b/c', '/a/b/d', '/a/b/e/r').should.equal('/a/b')
+```
+
+should treat paths starting without a slash as absolute.
+
+```js
+p.commonDir('a').should.equal('/')
+p.commonDir('a/b', 'c/d').should.equal('/')
+p.commonDir('a/b/c', 'a/b/d', 'a/b/e/r').should.equal('/a/b')
+```
+
 ## Running the tests
 
 To run in node just run `$ make test`
