@@ -23,9 +23,7 @@ exports.extname = function(path){
  */
 
 exports.join = function() {
-  return normalize(slice(arguments).filter(function(p, index) {
-    return p
-  }).join('/'));
+  return normalize(slice(arguments).join('/'));
 };
 
 /**
@@ -62,6 +60,7 @@ function normalize (path) {
 function split (path) {
   if (path[0] === '/') path = path.slice(1)
   if (path[path.length - 1] === '/') path = path.slice(0, -1)
+  if (!path) return []
   return path.split('/')
 }
 

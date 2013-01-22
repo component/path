@@ -41,7 +41,7 @@ describe('.join(path)', function () {
   })
 })
 
-describe('normalize(path)', function () {
+describe('.normalize(path)', function () {
   it('should iron out the path', function () {
     p.normalize('/foo/bar//baz/asdf/quux/..').should.equal('/foo/bar/baz/asdf')
   })
@@ -50,15 +50,17 @@ describe('normalize(path)', function () {
   })
 })
 
-describe('split(path)', function () {
-  it('return an ordered array of segments', function () {
+describe('.split(path)', function () {
+  it('should return an ordered array of segments', function () {
     p.split('/a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
     p.split('a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
     p.split('a/b/c/d/').should.deep.equal(['a', 'b', 'c', 'd'])
+    p.split('/').should.deep.equal([])
+    p.split('').should.deep.equal([])
   })
 })
 
-describe('commonDir(...)', function () {
+describe('.commonDir(...)', function () {
   it('should return "/" if there isn\'t a common directory', function () {
     p.commonDir().should.equal('/')
     p.commonDir('/').should.equal('/')
