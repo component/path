@@ -12,11 +12,10 @@
   "devDependencies": {
     "mocha": "*",
     "chai": "*",
-    "bigfile": "~0.2.1",
-    "sourcegraph": "~0.4.0"
+    "sourcegraph": "0.6.4",
+    "bigfile": "0.3.3"
   },
-  "main": "index",
   "dependencies": {
-    "sliced": "~0.0.4"
+    "sliced": "0.0.5"
   }
 }
