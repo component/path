@@ -9,15 +9,16 @@
  */
 
 module.exports = function(path){
-  var isAbsolute = path[0] === '/'
-  var res = []
-  path = path.split('/')
+  var segs = path.split('/')
+  if (segs.length <= 1) return path
+  var res = [segs[0]]
 
-  for (var i = 0, len = path.length; i < len; i++) {
-    var seg = path[i]
+  for (var i = 1, len = segs.length; i < len; i++) {
+    var seg = segs[i]
+    if (seg === '' || seg === '.') continue
     if (seg === '..') res.pop()
-    else if (seg && seg !== '.') res.push(seg)
+    else res.push(seg)
   }
 
-  return (isAbsolute ? '/' : '') + res.join('/')
+  return res.join('/')
 }
