@@ -1,3 +1,4 @@
+
 /**
  * get the filename with its any parent segments
  *
@@ -6,5 +7,7 @@
  */
 
 module.exports = function(path){
-  return path.split('/').pop();
+	var i = path.lastIndexOf('/')
+	if (i < 0) return path
+	return path.slice(i + 1)
 }

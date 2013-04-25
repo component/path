@@ -1,3 +1,4 @@
+
 /**
  * get the parent directory path
  *
@@ -6,5 +7,7 @@
  */
 
 module.exports = function(path){
-  return path.split('/').slice(0, -1).join('/') || '.'; 
+	var i = path.lastIndexOf('/')
+	if (i < 0) return '.'
+	return path.slice(0, i)
 }
