@@ -1,6 +1,5 @@
 
 var normalize = require('./normalize')
-  , slice = require('sliced')
 
 /**
  * Concatenate a sequence of path segments to generate one flat path
@@ -9,6 +8,9 @@ var normalize = require('./normalize')
  * @return {String}
  */
 
-module.exports = function(){
-  return normalize(slice(arguments).join('/'));
+module.exports = function(path){
+	for (var i = 1, len = arguments.length; i < len; i++) {
+		path += '/' + arguments[i]
+	}
+  return normalize(path)
 }
