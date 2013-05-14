@@ -29,6 +29,9 @@ describe('.dirname(path)', function(){
     p.dirname('foo/bar/baz').should.equal('foo/bar');
     p.dirname('foo/bar/baz/').should.equal('foo/bar/baz');
     p.dirname('foo/bar/baz.png').should.equal('foo/bar');
+    p.dirname('/foo/bar').should.equal('/foo');
+    p.dirname('/foo').should.equal('/');
+    p.dirname('/').should.equal('/');
   })
 })
 
