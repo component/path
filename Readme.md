@@ -2,15 +2,18 @@
 
   Path utilities.
 
-## API
-
+# API
    - [.extname(path)](#extnamepath)
    - [.basename(path)](#basenamepath)
    - [.dirname(path)](#dirnamepath)
+   - [.join(path)](#joinpath)
+   - [normalize(path)](#normalizepath)
+   - [split(path)](#splitpath)
+   - [commonDir(...)](#commondir)
 <a name=""></a>
  
 <a name="extnamepath"></a>
-### .extname(path)
+# .extname(path)
 should return the extension.
 
 ```js
@@ -22,10 +25,11 @@ p.extname('foo/bar.bar.baz/raz.png').should.equal('.png');
 ```
 
 <a name="basenamepath"></a>
-### .basename(path)
+# .basename(path)
 should return the last path segment.
 
 ```js
+p.basename('foo/').should.equal('');
 p.basename('foo').should.equal('foo');
 p.basename('foo/bar/baz').should.equal('baz');
 p.basename('foo/bar/baz').should.equal('baz');
@@ -33,16 +37,78 @@ p.basename('foo/bar/baz.png').should.equal('baz.png');
 ```
 
 <a name="dirnamepath"></a>
-### .dirname(path)
-should return the leading segments.
+# .dirname(path)
+<a name="joinpath"></a>
+# .join(path)
+should join segements sequencially.
 
 ```js
-p.dirname('').should.equal('.');
-p.dirname('foo').should.equal('.');
-p.dirname('foo/bar/baz').should.equal('foo/bar');
-p.dirname('foo/bar/baz.png').should.equal('foo/bar');
+p.join('foo').should.equal('foo')
+p.join('foo', 'bar').should.equal('foo/bar')
 ```
 
+should normalize the result.
+
+```js
+p.join('/foo', 'bar', '/baz/asdf', 'quux', '..').should.equal('/foo/bar/baz/asdf')
+```
+
+<a name="normalizepath"></a>
+# normalize(path)
+should iron out the path.
+
+```js
+p.normalize('/foo/bar//baz/asdf/quux/..').should.equal('/foo/bar/baz/asdf')
+```
+
+should only return an absolute path if its given one.
+
+```js
+p.normalize('foo/bar').should.equal('foo/bar')
+```
+
+<a name="splitpath"></a>
+# split(path)
+return an ordered array of segments.
+
+```js
+p.split('/a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
+p.split('a/b/c/d').should.deep.equal(['a', 'b', 'c', 'd'])
+p.split('a/b/c/d/').should.deep.equal(['a', 'b', 'c', 'd'])
+```
+
+<a name="commondir"></a>
+# commonDir(...)
+should return "/" if there isn't a common directory.
+
+```js
+p.commonDir().should.equal('/')
+p.commonDir('/').should.equal('/')
+p.commonDir('').should.equal('/')
+p.commonDir('/a/b', '/c/d').should.equal('/')
+```
+
+should return the first common directory.
+
+```js
+p.commonDir('/a/b/c').should.equal('/a/b')
+p.commonDir('/a/b/c', '/a/b/d').should.equal('/a/b')
+p.commonDir('/a/b/c', '/a/b/d', '/a/b/e/r').should.equal('/a/b')
+```
+
+should treat paths starting without a slash as absolute.
+
+```js
+p.commonDir('a').should.equal('/')
+p.commonDir('a/b', 'c/d').should.equal('/')
+p.commonDir('a/b/c', 'a/b/d', 'a/b/e/r').should.equal('/a/b')
+```
+
+## Running the tests
+
+To run in node just run `$ make test`
+
+To run in a browser you first need to build by running `$ make test/built.js`. Then navigate your browser to the test directory of the repo.
 
 ## License 
 

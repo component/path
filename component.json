@@ -1,7 +1,10 @@
 {
   "name": "path",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Path utilities",
   "keywords": ["path", "basename", "dirname", "extname"],
-  "scripts": ["index.js"]
+  "scripts": ["index.js"],
+  "dependencies": {
+  	"aheckmann/sliced": "*"
+  }
 }
