@@ -11,14 +11,23 @@
 module.exports = function(path){
   var segs = path.split('/')
   if (segs.length <= 1) return path
-  var res = [segs[0]]
+  var res = []
+  var up = 0
 
-  for (var i = 1, len = segs.length; i < len; i++) {
+  for (var i = 0, len = segs.length; i < len; i++) {
     var seg = segs[i]
     if (seg === '' || seg === '.') continue
-    if (seg === '..') res.pop()
-    else res.push(seg)
+    if (seg === '..') up++, res.pop()
+    else up--, res.push(seg)
   }
 
-  return res.join('/')
+  if (up > 0) {
+    if (path[0] == '/') return '/'
+    res = '..'
+    while (--up) res += '/..'
+    return res
+  }
+  return path[0] == '/'
+    ? '/' + res.join('/')
+    : res.join('/') || '.'
 }

@@ -1,6 +1,6 @@
 
 var p = require('..')
-  , should = require('chai').should()
+var should = require('chai').should()
 
 describe('.extname(path)', function(){
   it('should return the extension', function(){
@@ -51,6 +51,19 @@ describe('.normalize(path)', function () {
   })
   it('should only return an absolute path if its given one', function () {
     p.normalize('foo/bar').should.equal('foo/bar')
+  })
+  it('should not be able to escape the top level', function () {
+    p.normalize('/').should.equal('/')
+    p.normalize('/foo').should.equal('/foo')
+    p.normalize('/foo/..').should.equal('/')
+    p.normalize('/foo/../').should.equal('/')
+    p.normalize('/foo/../..').should.equal('/')
+  })
+  it('should be able to reference out if its a relative path', function () {
+    p.normalize('foo/..').should.equal('.')
+    p.normalize('foo/../..').should.equal('..')
+    p.normalize('./foo/../..').should.equal('..')
+    p.normalize('./foo/../../').should.equal('..')
   })
 })
 
