@@ -2,12 +2,21 @@
   "name": "path",
   "version": "1.0.0",
   "description": "Path utilities",
-  "keywords": ["path", "basename", "dirname", "extname"],
+  "keywords": [
+    "path",
+    "basename",
+    "dirname",
+    "extname"
+  ],
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "dependencies": {},
   "devDependencies": {
     "mocha": "*",
     "should": "*"
   },
-  "main": "index"
+  "main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/component/path.git"
+  }
 }
